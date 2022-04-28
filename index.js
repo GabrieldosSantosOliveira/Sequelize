@@ -5,12 +5,12 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }))
-app.get('/', function(req,res){
-let resultado = usuario.findAll();
+app.get('/', async function(req,res){
+let resultado = await usuario.findAll();
   res.json(resultado);
 })
-app.post('/', function(req,res){
- let resultado = usuario.create();
+app.post('/', async function(req,res){
+ let resultado = await usuario.create();
   res.json(resultado);
 })
 app.listen(3000, function(){
