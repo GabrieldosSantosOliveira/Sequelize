@@ -1,6 +1,6 @@
 let express = require("express");
 let app = express();
-let {usuario} = require("./models")
+let {usuario, empresa} = require("./models")
 
 app.use(express.json());
 
@@ -8,19 +8,19 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-app.get('/:id', async function(req,res){
+app.get('/usuarios/:id', async function(req,res){
 let resultado = await usuario.findByPk(req.params.id);
   res.json(resultado);
 })
-app.get('/', async function(req,res){
+app.get('/usuarios', async function(req,res){
 let resultado = await usuario.findAll();
   res.json(resultado);
 })
-app.post('/', async function(req,res){
+app.post('/usuarios', async function(req,res){
  let resultado = await usuario.create(req.body);
   res.json(resultado);
 })
-app.put('/:id', async function(req,res){
+app.put('/usuarios/:id', async function(req,res){
   
  let resultado = await usuario.update( 
    req.body, 
@@ -28,11 +28,36 @@ app.put('/:id', async function(req,res){
 ) 
    res.json(resultado) 
 })
-app.delete('/:id', async function(req,res){
+app.delete('/usuarios/:id', async function(req,res){
  let resultado = await usuario.destroy({ where: req.params});
   res.json(resultado);
 })
-app.listen(3000, function(){
+
+app.get('/empresas/:id', async function(req,res){
+let resultado = await empresa.findByPk(req.params.id);
+  res.json(resultado);
+})
+app.get('/empresas', async function(req,res){
+let resultado = await empresa.findAll();
+  res.json(resultado);
+})
+app.post('/empresas', async function(req,res){
+ let resultado = await empresa.create(req.body);
+  res.json(resultado);
+})
+app.put('/empresas/:id', async function(req,res){
+  
+ let resultado = await empresa.update( 
+   req.body, 
+   {where: req.params} 
+) 
+   res.json(resultado) 
+})
+app.delete('/empresas/:id', async function(req,res){
+ let resultado = await empresa.destroy({ where: req.params});
+  res.json(resultado);
+})
+app.listen(3300, function(){
   console.log("O servidor está bruto de mais")
 });
 
