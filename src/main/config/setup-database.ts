@@ -16,9 +16,11 @@ export const setupDatabase = () => {
       host: env.DB_HOST,
     },
   )
+
   Aluno.initModel(sequelize)
   Company.initModel(sequelize)
   User.initModel(sequelize)
   Company.associate(sequelize.models)
   User.associate(sequelize.models)
+  return { sequelize }
 }

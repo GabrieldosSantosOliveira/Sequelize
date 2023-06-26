@@ -2,12 +2,12 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
+    jest: true,
   },
-  extends: [
-    "@rocketseat/eslint-config/node",
-  ],
+  extends: ['@rocketseat/eslint-config/node'],
   plugins: ['eslint-plugin-import-helpers'],
   rules: {
+    'no-useless-constructor': 'off',
     'import-helpers/order-imports': [
       'warn',
       {
@@ -20,4 +20,4 @@ module.exports = {
       },
     ],
   },
-};
+}

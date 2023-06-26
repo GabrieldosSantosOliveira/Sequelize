@@ -1,10 +1,13 @@
-import { Router } from 'express'
+import { Company } from '@/infra/database/sequelize/models/empresa'
+import { randomUUID } from 'crypto'
+import { FastifyInstance } from 'fastify'
 
-import { Company } from '../../infra/database/sequelize/models/empresa'
-
-export default function CreateCompany(router: Router) {
-  router.post('/empresas', async function (req, res) {
-    const resultado = await Company.create(req.body)
-    res.json(resultado)
+export default function CreateCompany(fastify: FastifyInstance) {
+  fastify.post('/empresas', async function (req, res) {
+    const resultado = await Company.create({
+      ...req.body,
+      id: randomUUID(),
+    } as any)
+    res.send(resultado)
   })
 }

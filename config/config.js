@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 const config = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
@@ -7,7 +7,7 @@ const config = {
   dialect: process.env.DB_DIALECT,
   port: Number(process.env.DB_PORT),
   define: {
-    timestamps: true
-  }
-};
+    timestamps: true,
+  },
+}
 module.exports = config

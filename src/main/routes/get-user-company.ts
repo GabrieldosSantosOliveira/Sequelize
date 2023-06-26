@@ -1,12 +1,12 @@
-import { Router } from 'express'
+import { FastifyInstance } from 'fastify'
 
 import { User } from '../../infra/database/sequelize/models/usuario'
 
-export default function GetUserCompany(router: Router) {
-  router.get('/usuarios/:id/empresa', async function (req, res) {
-    const resultado = await User.findByPk(req.params.id, {
+export default function GetUserCompany(fastify: FastifyInstance) {
+  fastify.get('/usuarios/:id/empresa', async function (req, res) {
+    const resultado = await User.findByPk(req.params.id as string, {
       include: 'empresa',
     })
-    res.json(resultado?.empresa)
+    res.send(resultado?.empresa)
   })
 }

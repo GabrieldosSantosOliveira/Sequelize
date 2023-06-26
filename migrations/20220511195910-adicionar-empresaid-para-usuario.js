@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 /** @type {import('sequelize-cli').Migration} */
 
 module.exports = {
@@ -10,10 +10,10 @@ module.exports = {
         model: 'empresas',
         key: 'id',
       },
-    });
+    })
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('usuarios', 'empresaId');
+    await queryInterface.removeColumn('usuarios', 'empresaId')
   },
-};
+}
