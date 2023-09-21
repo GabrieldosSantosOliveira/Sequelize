@@ -3,7 +3,7 @@ import { SequelizeService } from '@/main/config/setup-database'
 import { FastifyInstance } from 'fastify'
 import request from 'supertest'
 
-let app: FastifyInstance  | null =null
+let app: FastifyInstance | null | undefined = null
 describe('Json Parser', () => {
   beforeAll(async () => {
     const appSetup = await setupApp()
