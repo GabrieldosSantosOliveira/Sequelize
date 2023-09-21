@@ -1,8 +1,8 @@
 import { Company } from '@/app/entities'
 import { LoadCompaniesRepository } from '@/app/repositories/load-companies-repository'
-import { IGetCompaniesUseCase } from '@/interface/use-cases/get-companies-use-case'
+import { GetCompaniesUseCase } from '@/app/use-cases/get-companies-use-case'
 
-export class GetCompaniesUseCase implements IGetCompaniesUseCase {
+export class GetCompaniesUseCaseImpl implements GetCompaniesUseCase {
   constructor(
     private readonly loadCompaniesRepository: LoadCompaniesRepository,
   ) {}

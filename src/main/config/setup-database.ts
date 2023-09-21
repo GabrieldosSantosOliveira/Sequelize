@@ -6,21 +6,32 @@ import { Company } from './../../infra/database/sequelize/models/empresa'
 import { User } from './../../infra/database/sequelize/models/usuario'
 
 export const setupDatabase = () => {
-  const sequelize = new Sequelize(
-    env.DB_DATABASE as string,
-    env.DB_USERNAME as string,
-    env.DB_PASSWORD as string,
-    {
-      dialect: env.DB_DIALECT,
-      port: env.DB_PORT,
-      host: env.DB_HOST,
-    },
-  )
+  Aluno.initModel(SequelizeService.getInstance())
+  Company.initModel(SequelizeService.getInstance())
+  User.initModel(SequelizeService.getInstance())
+  Company.associate(SequelizeService.getInstance().models)
+  User.associate(SequelizeService.getInstance().models)
+}
+export class SequelizeService extends Sequelize {
+  private static _value: null | Sequelize = null
+  private constructor() {
+    super(
+      env.DB_DATABASE as string,
+      env.DB_USERNAME as string,
+      env.DB_PASSWORD as string,
+      {
+        dialect: env.DB_DIALECT || 'postgres',
+        port: env.DB_PORT,
+        host: env.DB_HOST || 'localhost',
+      },
+    )
+  }
 
-  Aluno.initModel(sequelize)
-  Company.initModel(sequelize)
-  User.initModel(sequelize)
-  Company.associate(sequelize.models)
-  User.associate(sequelize.models)
-  return { sequelize }
+  static getInstance() {
+    if (!this._value) {
+      this._value = new SequelizeService()
+    }
+
+    return this._value
+  }
 }

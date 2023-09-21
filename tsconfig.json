@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "strictPropertyInitialization": false,
-    "target": "es2016",
+    "target": "es2022",
     "module": "commonjs",
     "allowJs": true,
     "checkJs": true,
@@ -13,11 +13,22 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
+    "allowUnreachableCode":true,
+    "allowUnusedLabels":true,
+    "alwaysStrict":true,
+    "exactOptionalPropertyTypes":true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
     "paths": {
       "@/app/*": ["./src/app/*"],
+      "@/data/*": ["./src/data/*"],
       "@/helpers/*": ["./src/helpers/*"],
       "@/infra/*": ["./src/infra/*"],
-      "@/interface/*": ["./src/interface/*"],
       "@/main/*": ["./src/main/*"],
       "@/presentation/*": ["./src/presentation/*"],
       "@/test/*": ["./test/*"]

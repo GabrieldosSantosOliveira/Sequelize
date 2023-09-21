@@ -16,13 +16,12 @@ module.exports = {
       {
         alias: {
           '@/app': './src/app',
+          '@/data': './src/data',
           '@/helpers': './src/helpers',
           '@/infra': './src/infra',
-          '@/interface': './src/interface',
           '@/main': './src/main',
           '@/presentation': './src/presentation',
           '@/test': './test',
-          '@/utils': './src/utils',
         },
       },
     ],

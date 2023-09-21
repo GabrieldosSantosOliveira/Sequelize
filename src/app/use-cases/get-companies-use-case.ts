@@ -1,5 +1,5 @@
 import { Company } from '@/app/entities'
 
-export interface IGetCompaniesUseCase {
+export interface GetCompaniesUseCase {
   handle(): Promise<Company[]>
 }

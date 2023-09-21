@@ -9,8 +9,14 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "rimraf ./dist && babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "test": "jest",
-    "format": "prettier -w ."
+    "test": "jest --passWithNoTests --colors --runInBand",
+    "format": "prettier -w .",
+    "test:unit": "npm run test -- -c jest-unit-config.js",
+    "test:unit:watch": "npm run test:unit -- --watch",
+    "test:integration": "npm run test -- -c jest-integration-config.js",
+    "test:integration:watch": "npm run test:integration -- --watch",
+    "test:staged": "npm run test -- --findRelatedTests --silent",
+    "test:ci": "npm run test -- --coverage"
   },
   "keywords": [],
   "author": "Gabriel dos Santos Oliveira <gabrielsantosoliveira951@gmail.com>",

@@ -1,4 +1,4 @@
-import { HttpResponse } from '@/interface/http/http-response'
+import { HttpResponse } from '@/data/protocols/http/http-response'
 
 import { ServerError } from '../errors/server-error'
 import { HttpStatusCode } from './http-status-code'
@@ -9,6 +9,6 @@ export const serverError = (): HttpResponse => {
     statusCode: HttpStatusCode.SERVER_ERROR,
   }
 }
-export const ok = (body: any): HttpResponse => {
+export const ok = (body: unknown): HttpResponse => {
   return { body, statusCode: HttpStatusCode.OK }
 }

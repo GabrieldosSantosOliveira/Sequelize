@@ -1,14 +1,11 @@
 import { Replace } from '@/helpers/utility-types/replace'
 import { randomUUID } from 'node:crypto'
 
-import { Company } from './company'
-
 export interface UserProps {
   id: string
   name: string
   createdAt: Date
   updatedAt: Date
-  company: Company
 }
 export class User {
   private props: UserProps
@@ -40,10 +37,6 @@ export class User {
 
   public get createdAt() {
     return this.props.createdAt
-  }
-
-  public get company() {
-    return this.props.company
   }
 
   public get updatedAt() {
