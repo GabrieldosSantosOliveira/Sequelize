@@ -28,6 +28,8 @@
     "fastify": "^4.23.2",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
+    "pino": "^8.15.1",
+    "pino-pretty": "^10.2.0",
     "sequelize": "^6.33.0"
   },
   "devDependencies": {

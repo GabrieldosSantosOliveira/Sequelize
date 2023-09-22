@@ -8,4 +8,5 @@ export const env = {
   DB_PORT: Number(process.env.DB_PORT) || 3000,
   DB_DIALECT: process.env.DB_DIALECT as Options['dialect'],
   APP_PORT: Number(process.env.APP_PORT) || 3333,
+  NODE_DEV: process.env.NODE_DEV === 'dev',
 }
