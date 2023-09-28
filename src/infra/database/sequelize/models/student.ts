@@ -9,13 +9,16 @@ type AlunoAttributes = {
 }
 
 type AlunoCreationAttributes = Optional<AlunoAttributes, 'id'>
-export class Aluno extends Model<AlunoAttributes, AlunoCreationAttributes> {
-  id: string
-  nome: string
-  data_nascimento: Date
-  idade: number
-  createdAt: Date
-  updatedAt: Date
+export class AlunoModel extends Model<
+  AlunoAttributes,
+  AlunoCreationAttributes
+> {
+  declare id: string
+  declare nome: string
+  declare data_nascimento: Date
+  declare idade: number
+  declare createdAt: Date
+  declare updatedAt: Date
   static initModel(sequelize: Sequelize) {
     this.init(
       {

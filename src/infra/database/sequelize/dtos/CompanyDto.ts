@@ -1,6 +1,6 @@
 export interface CompanyDto {
   id: string
-  name: string
+  nome: string
   createdAt: Date
   updatedAt: Date
 }

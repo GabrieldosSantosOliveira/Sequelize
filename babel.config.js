@@ -1,6 +1,6 @@
 module.exports = {
   presets: [
-    '@babel/preset-typescript',
+    ['@babel/preset-typescript', { allowDeclareFields: true }],
     [
       '@babel/preset-env',
       {
@@ -21,6 +21,7 @@ module.exports = {
           '@/infra': './src/infra',
           '@/main': './src/main',
           '@/presentation': './src/presentation',
+          '@/shared': './src/shared',
           '@/test': './test',
         },
       },

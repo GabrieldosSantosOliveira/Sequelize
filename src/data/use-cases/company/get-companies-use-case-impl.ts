@@ -7,7 +7,12 @@ export class GetCompaniesUseCaseImpl implements GetCompaniesUseCase {
     private readonly loadCompaniesRepository: LoadCompaniesRepository,
   ) {}
 
-  async handle(): Promise<Company[]> {
-    return await this.loadCompaniesRepository.findAll()
+  async handle(
+    page: number,
+    sizePerPage?: number | undefined,
+  ): Promise<Company[]> {
+    const IS_PAGE_NUMBER_BIGGER_THAN_ONE: boolean = page > 1
+    const PAGE: number = IS_PAGE_NUMBER_BIGGER_THAN_ONE ? 1 : page
+    return await this.loadCompaniesRepository.findAll(PAGE, sizePerPage || 20)
   }
 }

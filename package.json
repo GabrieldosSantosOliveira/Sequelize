@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsnd  -r tsconfig-paths/register --respawn --transpile-only ./src/main/server",
     "start": "node .",
+    "check": "npm run type:check && npm run lint && npm run test",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "rimraf ./dist && babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
@@ -30,7 +31,8 @@
     "pg-hstore": "^2.3.4",
     "pino": "^8.15.1",
     "pino-pretty": "^10.2.0",
-    "sequelize": "^6.33.0"
+    "sequelize": "^6.33.0",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.15",
@@ -38,6 +40,7 @@
     "@babel/node": "^7.22.19",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-typescript": "^7.22.15",
+    "@faker-js/faker": "^8.1.0",
     "@rocketseat/eslint-config": "^2.1.0",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.6.3",

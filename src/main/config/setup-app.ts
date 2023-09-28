@@ -5,7 +5,7 @@ import { setupDatabase } from './setup-database'
 import { setupRoutes } from './setup-routes'
 export const setupApp = async () => {
   const app = await fastify({
-    logger: env.NODE_DEV,
+    logger: env.NODE_ENV,
   })
   setupDatabase()
   await setupRoutes(app)

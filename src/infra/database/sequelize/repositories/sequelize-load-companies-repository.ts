@@ -2,12 +2,18 @@ import { Company } from '@/app/entities'
 import { LoadCompaniesRepository } from '@/app/repositories/load-companies-repository'
 
 import { SequelizeCompanyMapper } from '../mappers/SequelizeCompanyMapper'
-import { Company as CompanyModel } from './../models/empresa'
+import { CompanyModel } from './../models/company'
 export class SequelizeLoadCompaniesRepository
   implements LoadCompaniesRepository
 {
-  async findAll(): Promise<Company[]> {
-    const companies = await CompanyModel.findAll()
-    return companies.map(SequelizeCompanyMapper.toDomain)
+  async findAll(page: number, sizePerPage: number): Promise<Company[]> {
+    const offset = (page - 1) * sizePerPage
+    const rawCompanies = await CompanyModel.findAll({
+      offset,
+      limit: sizePerPage,
+    })
+    console.log(rawCompanies[0].dataValues.nome)
+
+    return rawCompanies.map(SequelizeCompanyMapper.toDomain)
   }
 }

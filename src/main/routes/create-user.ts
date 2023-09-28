@@ -1,10 +1,10 @@
 import { FastifyInstance } from 'fastify'
 
-import { User } from '../../infra/database/sequelize/models/usuario'
+import { UserModel } from '../../infra/database/sequelize/models/user'
 
 export default function CreateUser(fastify: FastifyInstance) {
   fastify.post('/usuarios', async function (req, res) {
-    const resultado = await User.create(req.body as any)
+    const resultado = await UserModel.create(req.body as any)
     res.send(resultado)
   })
 }

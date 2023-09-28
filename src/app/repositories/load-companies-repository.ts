@@ -1,5 +1,5 @@
 import { Company } from '../entities'
 
 export interface LoadCompaniesRepository {
-  findAll(): Promise<Company[]>
+  findAll(page: number, sizePerPage: number): Promise<Company[]>
 }

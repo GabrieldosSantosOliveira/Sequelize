@@ -1,10 +1,18 @@
+import { ServerErrorControllerDecorator } from '@/presentation/decorator/server-error-controller-decorator'
 import { FastifyInstance } from 'fastify'
 
-import { Company } from '../../infra/database/sequelize/models/empresa'
+import { makeFastifyRouterAdapter } from '../adapters/make-fastify-router-adapter'
+import { makeLogger } from '../factories/infra/logger/make-logger'
+import { makeRemoveCompanyController } from '../factories/presentation/controller/company/make-remove-company-controller'
 
 export default function DeleteCompany(fastify: FastifyInstance) {
-  fastify.delete('/empresas/:id', async function (req, res) {
-    const resultado = await Company.destroy({ where: req.params as any })
-    res.send(resultado)
-  })
+  fastify.delete(
+    '/company/:id',
+    makeFastifyRouterAdapter(
+      new ServerErrorControllerDecorator(
+        makeRemoveCompanyController(),
+        makeLogger(),
+      ),
+    ),
+  )
 }

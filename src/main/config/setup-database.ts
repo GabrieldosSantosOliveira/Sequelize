@@ -1,16 +1,16 @@
+import { CompanyModel } from '@/infra/database/sequelize/models/company'
+import { AlunoModel } from '@/infra/database/sequelize/models/student'
+import { UserModel } from '@/infra/database/sequelize/models/user'
 import { Sequelize } from 'sequelize'
 
 import { env } from '../config/env'
-import { Aluno } from './../../infra/database/sequelize/models/aluno'
-import { Company } from './../../infra/database/sequelize/models/empresa'
-import { User } from './../../infra/database/sequelize/models/usuario'
 
 export const setupDatabase = () => {
-  Aluno.initModel(SequelizeService.getInstance())
-  Company.initModel(SequelizeService.getInstance())
-  User.initModel(SequelizeService.getInstance())
-  Company.associate(SequelizeService.getInstance().models)
-  User.associate(SequelizeService.getInstance().models)
+  AlunoModel.initModel(SequelizeService.getInstance())
+  CompanyModel.initModel(SequelizeService.getInstance())
+  UserModel.initModel(SequelizeService.getInstance())
+  CompanyModel.associate(SequelizeService.getInstance().models)
+  UserModel.associate(SequelizeService.getInstance().models)
 }
 export class SequelizeService extends Sequelize {
   private static _value: null | Sequelize = null

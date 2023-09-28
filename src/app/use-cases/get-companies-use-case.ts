@@ -1,5 +1,5 @@
 import { Company } from '@/app/entities'
 
 export interface GetCompaniesUseCase {
-  handle(): Promise<Company[]>
+  handle(page: number, sizePerPage?: number): Promise<Company[]>
 }

@@ -1,9 +1,9 @@
 import { Company } from '@/app/entities'
 
 import { CompanyDto } from '../dtos/CompanyDto'
-import { Company as SequelizeCompany } from './../models/empresa'
+import { CompanyModel } from './../models/company'
 export class SequelizeCompanyMapper {
-  static toDomain(sequelizeCompany: SequelizeCompany): Company {
+  static toDomain(sequelizeCompany: CompanyModel): Company {
     return new Company({
       name: sequelizeCompany.nome,
       createdAt: sequelizeCompany.createdAt,
@@ -16,7 +16,7 @@ export class SequelizeCompanyMapper {
     return {
       createdAt: company.createdAt,
       id: company.id,
-      name: company.name,
+      nome: company.name,
       updatedAt: company.updatedAt,
     }
   }

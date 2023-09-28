@@ -1,5 +1,4 @@
 import { Replace } from '@/helpers/utility-types/replace'
-import { randomUUID } from 'node:crypto'
 
 export interface CompanyProps {
   id: string
@@ -10,16 +9,11 @@ export interface CompanyProps {
 export class Company {
   private props: CompanyProps
   constructor({
-    id,
     createdAt,
     updatedAt,
     ...props
-  }: Replace<
-    CompanyProps,
-    { createdAt?: Date; updatedAt?: Date; id?: string }
-  >) {
+  }: Replace<CompanyProps, { createdAt?: Date; updatedAt?: Date }>) {
     this.props = {
-      id: id || randomUUID(),
       createdAt: createdAt || new Date(),
       updatedAt: updatedAt || new Date(),
       ...props,

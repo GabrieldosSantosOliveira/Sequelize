@@ -1,25 +1,24 @@
 import { Model, Sequelize, DataTypes, Optional } from 'sequelize'
 
-import { Models, User } from './usuario'
-type CompanyAttributes = {
+import { CompanyModel } from './company'
+type UserAttributes = {
   id: string
   nome: string
   createdAt: Date
   updatedAt: Date
 }
 
-type CompanyCreationAttributes = Optional<CompanyAttributes, 'id'>
-export class Company extends Model<
-  CompanyAttributes,
-  CompanyCreationAttributes
-> {
-  id: string
-  nome: string
-  createdAt: Date
-  updatedAt: Date
-  usuarios: User
+type UserCreationAttributes = Optional<UserAttributes, 'id'>
+
+export type Models = Sequelize['models']
+export class UserModel extends Model<UserAttributes, UserCreationAttributes> {
+  declare id: string
+  declare nome: string
+  declare createdAt: Date
+  declare updatedAt: Date
+  declare empresa: CompanyModel
   static associate(models: Models) {
-    this.hasMany(models.usuario, { as: 'usuarios' })
+    this.belongsTo(models.empresa, { as: 'empresa' })
   }
 
   static initModel(sequelize: Sequelize) {
@@ -32,7 +31,7 @@ export class Company extends Model<
       },
       {
         sequelize,
-        modelName: 'empresa',
+        modelName: 'usuario',
       },
     )
   }

@@ -1,10 +1,10 @@
 import { FastifyInstance } from 'fastify'
 
-import { User } from '../../infra/database/sequelize/models/usuario'
+import { UserModel } from '../../infra/database/sequelize/models/user'
 
 export default function GetUsers(fastify: FastifyInstance) {
   fastify.get('/usuarios', async function (req, res) {
-    const resultado = await User.findAll()
+    const resultado = await UserModel.findAll()
     res.send(resultado)
   })
 }

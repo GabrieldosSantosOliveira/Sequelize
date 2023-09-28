@@ -31,6 +31,7 @@
       "@/infra/*": ["./src/infra/*"],
       "@/main/*": ["./src/main/*"],
       "@/presentation/*": ["./src/presentation/*"],
+      "@/shared/*": ["./src/shared/*"],
       "@/test/*": ["./test/*"]
     }
   }
