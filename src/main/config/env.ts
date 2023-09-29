@@ -9,4 +9,5 @@ export const env = {
   DB_DIALECT: process.env.DB_DIALECT as Options['dialect'],
   APP_PORT: Number(process.env.APP_PORT) || 3333,
   NODE_ENV: process.env.NODE_ENV === 'dev',
+  BASE_URL: process.env.BASE_URL,
 }

@@ -4,7 +4,7 @@ export const makeStudent = (student: Partial<StudentProps> = {}) => {
   return new Student({
     id: faker.string.uuid(),
     dateOfBirth: new Date(),
-    name: 'any_name',
+    name: faker.person.firstName(),
     ...student,
   })
 }

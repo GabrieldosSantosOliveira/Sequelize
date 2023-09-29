@@ -1,5 +1,5 @@
 import { Student } from '@/app/entities'
-import { makeStudent } from '@/test/factories/make-student'
+import { makeStudent } from '@/test/app/mocks/entities/make-student'
 
 describe('Student', () => {
   it('should be able create Student', () => {

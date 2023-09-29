@@ -6,8 +6,11 @@ import { GetCompaniesControllerDto } from '@/presentation/dtos/company/get-compa
 import { Controller } from '@/presentation/protocols/controller/controller'
 import { CompanyViewModel } from '@/presentation/view-models/company-view-model'
 
-import { badRequest, ok } from './../../helpers'
-
+import { badRequest, exception, ok, serverError } from './../../helpers'
+export interface GetCompaniesControllerRequestQuery {
+  sizePerPage?: number
+  page?: number
+}
 export class GetCompaniesController implements Controller {
   constructor(
     private readonly getCompaniesUseCase: GetCompaniesUseCase,
@@ -16,19 +19,35 @@ export class GetCompaniesController implements Controller {
     logger.info('instantiated GetCompaniesController')
   }
 
-  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const isValidQueryParams = GetCompaniesControllerDto.safeParse(
-      httpRequest.query,
-    )
-    if (!isValidQueryParams.success) {
-      return badRequest(isValidQueryParams.error)
+  async handle(
+    httpRequest: HttpRequest<
+      unknown,
+      GetCompaniesControllerRequestQuery,
+      unknown
+    >,
+  ): Promise<HttpResponse> {
+    try {
+      const isValidQueryParams = GetCompaniesControllerDto.safeParse(
+        httpRequest.query,
+      )
+      if (!isValidQueryParams.success) {
+        return badRequest(isValidQueryParams.error)
+      }
+      const query = isValidQueryParams.data
+      this.logger.info('handling GetCompaniesController')
+      const hasException = await this.getCompaniesUseCase.handle(
+        query.page || 1,
+        query.sizePerPage,
+      )
+      if (hasException.isLeft()) {
+        return exception(hasException.value)
+      }
+      return ok({
+        info: hasException.value.info,
+        data: hasException.value.data.map(CompanyViewModel.toHTTP),
+      })
+    } catch (e) {
+      return serverError()
     }
-    const query = isValidQueryParams.data
-    this.logger.info('handling GetCompaniesController')
-    const companies = await this.getCompaniesUseCase.handle(
-      query.page || 1,
-      query.sizePerPage,
-    )
-    return ok(companies.map(CompanyViewModel.toHTTP))
   }
 }

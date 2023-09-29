@@ -1,10 +1,12 @@
 import { Company } from '@/app/entities'
-import { LoadCompanyRepository } from '@/app/repositories/load-company-repository'
+import { LoadCompanyByIdRepository } from '@/app/repositories/load-company-by-id-repository'
 
 import { SequelizeCompanyMapper } from '../mappers/SequelizeCompanyMapper'
 import { CompanyModel } from '../models/company'
 
-export class SequelizeLoadCompanyRepository implements LoadCompanyRepository {
+export class SequelizeLoadCompanyRepository
+  implements LoadCompanyByIdRepository
+{
   async findById(id: string): Promise<Company | null> {
     const rawCompany = await CompanyModel.findByPk(id)
     if (!rawCompany) {
