@@ -17,7 +17,7 @@ export class CompanyModel extends Model<
   declare nome: string
   declare createdAt: Date
   declare updatedAt: Date
-  declare usuarios: UserModel
+  declare usuarios: UserModel[]
   static associate(models: Models) {
     this.hasMany(models.usuario, { as: 'usuarios' })
   }

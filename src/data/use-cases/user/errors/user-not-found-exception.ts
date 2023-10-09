@@ -6,5 +6,5 @@ export class UserNotFoundException extends Error implements Exception {
     super('User not found')
   }
 
-  statusCode = HttpStatusCode.NOT_FOUND
+  statusCode: number = HttpStatusCode.NOT_FOUND
 }

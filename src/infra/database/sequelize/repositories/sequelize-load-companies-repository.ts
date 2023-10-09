@@ -12,7 +12,6 @@ export class SequelizeLoadCompaniesRepository
       offset,
       limit: sizePerPage,
     })
-    console.log(rawCompanies[0].dataValues.nome)
 
     return rawCompanies.map(SequelizeCompanyMapper.toDomain)
   }
