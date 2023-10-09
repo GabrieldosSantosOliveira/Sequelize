@@ -1,10 +1,8 @@
 import { FastifyInstance } from 'fastify'
 
-import { UserModel } from '../../infra/database/sequelize/models/user'
+import { makeFastifyRouterAdapter } from '../adapters/make-fastify-router-adapter'
+import { makeCreateUserController } from '../factories/presentation/controller/user/make-create-user-controller'
 
 export default function CreateUser(fastify: FastifyInstance) {
-  fastify.post('/usuarios', async function (req, res) {
-    const resultado = await UserModel.create(req.body as any)
-    res.send(resultado)
-  })
+  fastify.post('/user', makeFastifyRouterAdapter(makeCreateUserController()))
 }

@@ -8,7 +8,9 @@ type UserAttributes = {
   updatedAt: Date
 }
 
-type UserCreationAttributes = Optional<UserAttributes, 'id'>
+type UserCreationAttributes = Optional<UserAttributes, 'id'> & {
+  empresaId: string
+}
 
 export type Models = Sequelize['models']
 export class UserModel extends Model<UserAttributes, UserCreationAttributes> {
