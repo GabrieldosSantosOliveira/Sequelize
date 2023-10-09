@@ -1,12 +1,11 @@
 import { FastifyInstance } from 'fastify'
 
-import { UserModel } from '../../infra/database/sequelize/models/user'
+import { makeFastifyRouterAdapter } from '../adapters/make-fastify-router-adapter'
+import { makeGetAllUsersOfCompanyController } from '../factories/presentation/controller/user/make-get-all-users-of-company-controller'
 
 export default function GetUserCompany(fastify: FastifyInstance) {
-  fastify.get('/usuarios/:id/empresa', async function (req, res) {
-    const resultado = await UserModel.findByPk('', {
-      include: 'empresa',
-    })
-    res.send(resultado?.empresa)
-  })
+  fastify.get(
+    '/company/:id/user',
+    makeFastifyRouterAdapter(makeGetAllUsersOfCompanyController()),
+  )
 }

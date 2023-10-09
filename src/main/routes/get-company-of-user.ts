@@ -5,7 +5,7 @@ import { makeGetAllCompaniesOfUserController } from '../factories/presentation/c
 
 export default function GetCompanyOfUser(fastify: FastifyInstance) {
   fastify.get(
-    '/company/:id/user',
+    '/user/:id/company',
     makeFastifyRouterAdapter(makeGetAllCompaniesOfUserController()),
   )
 }
