@@ -1,10 +1,8 @@
 import { FastifyInstance } from 'fastify'
 
-import { UserModel } from '../../infra/database/sequelize/models/user'
+import { makeFastifyRouterAdapter } from '../adapters/make-fastify-router-adapter'
+import { makeGetUsersController } from '../factories/presentation/controller/user/make-get-users-controller'
 
 export default function GetUsers(fastify: FastifyInstance) {
-  fastify.get('/usuarios', async function (req, res) {
-    const resultado = await UserModel.findAll()
-    res.send(resultado)
-  })
+  fastify.get('/user', makeFastifyRouterAdapter(makeGetUsersController()))
 }
