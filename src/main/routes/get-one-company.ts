@@ -1,10 +1,11 @@
 import { FastifyInstance } from 'fastify'
 
-import { CompanyModel } from '../../infra/database/sequelize/models/company'
+import { makeFastifyRouterAdapter } from '../adapters/make-fastify-router-adapter'
+import { makeGetOneCompanyController } from '../factories/presentation/controller/user/make-get-one-company-controller'
 
 export default function GetOneCompany(fastify: FastifyInstance) {
-  fastify.get('/empresas/:id', async function (req, res) {
-    const resultado = await CompanyModel.findByPk('')
-    res.send(resultado)
-  })
+  fastify.get(
+    '/company/:id',
+    makeFastifyRouterAdapter(makeGetOneCompanyController()),
+  )
 }
