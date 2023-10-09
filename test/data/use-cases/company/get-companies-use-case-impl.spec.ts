@@ -73,4 +73,15 @@ describe('GetCompaniesUseCaseImpl', () => {
     expect(expected).toBeTruthy()
     expect(expected?.includes('9')).toBeTruthy()
   })
+  it('should call LoadCompaniesRepository with correct params', async () => {
+    const SIZE = 10
+    const PAGE = 10
+    const { sut, inMemoryRepositoryCompanies } = await makeSutWithCompanies()
+    const loadCompaniesRepositorySpyOn = jest.spyOn(
+      inMemoryRepositoryCompanies,
+      'findAll',
+    )
+    await sut.handle(PAGE, SIZE)
+    expect(loadCompaniesRepositorySpyOn).toHaveBeenCalledWith(PAGE, SIZE)
+  })
 })

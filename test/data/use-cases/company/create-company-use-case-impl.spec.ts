@@ -44,4 +44,14 @@ describe('CreateCompanyUseCaseImpl', () => {
     expect(response.isLeft()).toBeTruthy()
     expect(response.value?.statusCode).toBe(HttpStatusCode.CONFLICT)
   })
+  it('should call LoadCompanyByNameRepository with correct name', async () => {
+    const { sut, inMemoryRepositoryCompanies } = makeSut()
+    const NAME = faker.company.name()
+    const loadCompanyByNameRepositorySpyOn = jest.spyOn(
+      inMemoryRepositoryCompanies,
+      'findByName',
+    )
+    await sut.handle(makeRequest({ name: NAME }))
+    expect(loadCompanyByNameRepositorySpyOn).toHaveBeenCalledWith(NAME)
+  })
 })

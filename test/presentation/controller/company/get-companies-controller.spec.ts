@@ -54,24 +54,33 @@ const makeRequest = (
 describe('GetCompaniesController', () => {
   it('should return companies if success', async () => {
     const { sut, getCompaniesUseCaseMock } = makeSut()
-    const companies = await sut.handle(makeRequest())
-    expect(companies.statusCode).toBe(HttpStatusCode.OK)
-    expect(companies.body).toHaveProperty('info')
-    expect(companies.body).toHaveProperty('data')
-    expect(companies.body?.data).toEqual(
+    const response = await sut.handle(makeRequest())
+    expect(response.statusCode).toBe(HttpStatusCode.OK)
+    expect(response.body).toHaveProperty('info')
+    expect(response.body).toHaveProperty('data')
+    expect(response.body?.data).toEqual(
       getCompaniesUseCaseMock.data.map(CompanyViewModel.toHTTP),
     )
-    expect(companies.body.info).toBe(getCompaniesUseCaseMock.info)
+    expect(response.body.info).toBe(getCompaniesUseCaseMock.info)
   })
   it('should return 500 if GetCompaniesUseCase throw', async () => {
     const { sut } = makeSutWithError()
-    const companies = await sut.handle(makeRequest())
+    const response = await sut.handle(makeRequest())
 
-    expect(companies.statusCode).toBe(HttpStatusCode.SERVER_ERROR)
+    expect(response.statusCode).toBe(HttpStatusCode.SERVER_ERROR)
   })
   it('should return 409 if GetCompaniesUseCase return exception', async () => {
     const { sut } = makeSutWithException()
-    const companies = await sut.handle(makeRequest())
-    expect(companies.statusCode).toBe(HttpStatusCode.NO_CONTENT)
+    const response = await sut.handle(makeRequest())
+    expect(response.statusCode).toBe(HttpStatusCode.NO_CONTENT)
+  })
+  it('should call GetCompaniesUseCase with correct param', async () => {
+    const { sut, getCompaniesUseCaseMock } = makeSut()
+    const getCompaniesUseCaseSpyOn = jest.spyOn(
+      getCompaniesUseCaseMock,
+      'handle',
+    )
+    await sut.handle(makeRequest({ page: 10, sizePerPage: 10 }))
+    expect(getCompaniesUseCaseSpyOn).toHaveBeenCalledWith(10, 10)
   })
 })

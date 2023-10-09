@@ -7,6 +7,7 @@ import {
   badRequest,
   exception,
   noContent,
+  serverError,
 } from '@/presentation/helpers'
 import { Controller } from '@/presentation/protocols/controller/controller'
 export interface RemoveCompanyControllerParams {
@@ -18,19 +19,23 @@ export class RemoveCompanyController implements Controller {
   async handle(
     request: HttpRequest<unknown, unknown, RemoveCompanyControllerParams>,
   ): Promise<HttpResponse> {
-    const isValidParams = RemoveCompanyParamDto.safeParse(request.params)
-    if (!isValidParams.success) {
-      return badRequest({
-        statusCode: HttpStatusCode.BAD_REQUEST,
-        error: 'Bad Request',
-        message: isValidParams.error,
-      })
+    try {
+      const isValidParams = RemoveCompanyParamDto.safeParse(request.params)
+      if (!isValidParams.success) {
+        return badRequest({
+          statusCode: HttpStatusCode.BAD_REQUEST,
+          error: 'Bad Request',
+          message: isValidParams.error,
+        })
+      }
+      const { id } = isValidParams.data
+      const hasException = await this.removeCompanyUseCase.handle(id)
+      if (hasException.isLeft()) {
+        return exception(hasException.value)
+      }
+      return noContent()
+    } catch {
+      return serverError()
     }
-    const { id } = isValidParams.data
-    const hasException = await this.removeCompanyUseCase.handle(id)
-    if (hasException.isLeft()) {
-      return exception(hasException.value)
-    }
-    return noContent()
   }
 }
